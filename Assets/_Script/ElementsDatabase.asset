@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34bd24727dd24e4785dba0a002ef200, type: 3}
+  m_Name: ElementsDatabase
+  m_EditorClassIdentifier: 
+  element:
+  - <elementName>k__BackingField: CUBE 1x1
+    <ID>k__BackingField: 0
+    <elementSize>k__BackingField: {x: 1, y: 1}
+    <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: e13ea26930aafa3488ce0b7ca1e06b5b,
+      type: 3}
+    <canSetElementAtThis>k__BackingField: 1
+  - <elementName>k__BackingField: CUBE 2x1
+    <ID>k__BackingField: 1
+    <elementSize>k__BackingField: {x: 2, y: 1}
+    <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: 4bbf04449f668f04ca35e8120b84276b,
+      type: 3}
+    <canSetElementAtThis>k__BackingField: 1
+  - <elementName>k__BackingField: SPHERE
+    <ID>k__BackingField: 2
+    <elementSize>k__BackingField: {x: 1, y: 1}
+    <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: 1d67c515245972340bae3344e08eae79,
+      type: 3}
+    <canSetElementAtThis>k__BackingField: 0
+  - <elementName>k__BackingField: CAPSULE
+    <ID>k__BackingField: 3
+    <elementSize>k__BackingField: {x: 1, y: 1}
+    <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: 99b404a82e565f94fb98199d99929a97,
+      type: 3}
+    <canSetElementAtThis>k__BackingField: 0
