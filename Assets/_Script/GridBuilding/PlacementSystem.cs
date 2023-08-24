@@ -20,7 +20,7 @@ public class PlacementSystem : MonoBehaviour
 
     IBuildingState buildingState;
 
-
+    //preview jak sciagasz prewiev z gory na dol
     private void Awake()
     {
         float scaleX = Convert.ToSingle(gridVisualization.transform.localScale.x / 0.1);
@@ -77,9 +77,9 @@ public class PlacementSystem : MonoBehaviour
     }
     private void StopPlacement()
     {
+        gridVisualization.SetActive(false);
         if (buildingState == null)
         { return; }
-        gridVisualization.SetActive(false);
         buildingState.EndState();
 
         // unsubscibe method from action

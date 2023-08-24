@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +10,7 @@ public class RemovingState : IBuildingState
     PreviewSystem previewSystem;
     GridData data;
     ElementPlacer elementPlacer;
+
 
     public RemovingState(Grid grid, PreviewSystem previewSystem, GridData data, ElementPlacer elementPlacer)
     {
@@ -27,9 +28,10 @@ public class RemovingState : IBuildingState
         previewSystem.StopShowingPreview();
     }
 
+    // dodac sprawdzenie czy na bloku coś stoi (jeśli tak to nie można usunąć tego na dole)
     public void OnAction(Vector3Int gridPosition)
     {
-        if (data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one).canPlace == false)
+        if (!data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one,true))
         {
             gameObjectIndex = data.GetRepresentationIndex(gridPosition);
             if (gameObjectIndex == -1)
@@ -43,7 +45,7 @@ public class RemovingState : IBuildingState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
     {
-        return !(data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one).canPlace);
+        return !(data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one,true));
     }
 
     public void UpdateState(Vector3Int gridPosition, Vector3 cellWorldPosition)

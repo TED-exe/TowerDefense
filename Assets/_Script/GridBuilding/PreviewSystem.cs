@@ -10,6 +10,7 @@ public class PreviewSystem : MonoBehaviour
     [SerializeField] private Material previewMaterialPrefab;
     private Material previewMaterialInstance;
 
+    [SerializeField] private LayerMask previewLayerMask;
     private Renderer cellIndicatorRenderer;
 
     private void Start()
@@ -21,7 +22,9 @@ public class PreviewSystem : MonoBehaviour
 
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
+        Debug.Log("spawn");
         previewObject = Instantiate(prefab);
+        
         PreparePreview(previewObject);
         PrepareCursor(size);
         cellIndicator.SetActive(true);
@@ -38,6 +41,9 @@ public class PreviewSystem : MonoBehaviour
 
     private void PreparePreview(GameObject previewObject)
     {
+        previewObject.transform.GetChild(0).gameObject.layer = 7;
+        previewObject.layer = 7;
+        previewObject.name += " PREVIEW";
         Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
         foreach (Renderer renderer in renderers)
         {

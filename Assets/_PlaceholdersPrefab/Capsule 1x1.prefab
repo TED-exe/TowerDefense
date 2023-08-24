@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3484326219104237872}
   - component: {fileID: 4451810004586172104}
   - component: {fileID: 3233158575485927434}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: capsule 1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792144482468130138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule 1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

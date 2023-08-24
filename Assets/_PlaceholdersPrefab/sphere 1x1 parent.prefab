@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792144482468130138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sphere 1x1 parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 9078128991161976138}
   - component: {fileID: 3806653515805463166}
   - component: {fileID: 7114471808157892514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere 1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

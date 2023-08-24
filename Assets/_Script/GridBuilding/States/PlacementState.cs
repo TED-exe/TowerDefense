@@ -38,33 +38,19 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
-        bool canPlaceElementOnThisCell = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize).canPlace;
-        bool canStackElementOnThisCell = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize).canPlaceOnThisElement;
-
-        if (!canPlaceElementOnThisCell && !canStackElementOnThisCell)
-        { return; }
-        else if (!canPlaceElementOnThisCell && canStackElementOnThisCell && database.element[selectedElementIndex].canSetElementAtThis == true)
+        bool placementValidity = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize, database.element[selectedElementIndex].canByPlacedOnOtherElemets);
+        if (!placementValidity)
         { return; }
 
         int index = elementPlacer.PlaceElement(database.element[selectedElementIndex].elementPrefab, grid.CellToWorld(gridPosition));
 
-        data.AddElementOnGridPosition(gridPosition, database.element[selectedElementIndex].elementSize, database.element[selectedElementIndex].ID, index, database.element[selectedElementIndex].canSetElementAtThis);
+        data.AddElementOnGridPosition(gridPosition, database.element[selectedElementIndex].elementSize, database.element[selectedElementIndex].ID, index, database.element[selectedElementIndex].canPlaceOnThisElement);
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 
     public void UpdateState(Vector3Int gridPosition, Vector3 cellWorldPosition)
     {
-        bool placementValidity;
-        bool canPlaceElementOnThisCell = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize).canPlace;
-        bool canStackElementOnThisCell = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize).canPlaceOnThisElement;
-
-
-        if (!canPlaceElementOnThisCell && !canStackElementOnThisCell)
-        { placementValidity = false; }
-        else if (!canPlaceElementOnThisCell && canStackElementOnThisCell && database.element[selectedElementIndex].canSetElementAtThis == true)
-        { placementValidity = false; }
-        else
-        { placementValidity = true; }
+        bool placementValidity = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize, database.element[selectedElementIndex].canByPlacedOnOtherElemets);
 
         previewSystem.UpdatePosition(cellWorldPosition, placementValidity);
     }

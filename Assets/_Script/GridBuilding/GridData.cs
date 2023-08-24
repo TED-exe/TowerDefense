@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -34,24 +34,28 @@ public class GridData // this is virtual grid to check where can you place eleme
             placementElement[position] = data;
         }
     }
-    public (bool canPlace, bool canPlaceOnThisElement) CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize)
+    public bool CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize, bool elementCanBePlaceOnOther = false)
     {
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
         foreach (var position in occupatePosition)
         {
             if (placementElement.ContainsKey(position))
             {
-                if (placementElement[position].canSetElementAtThis == true)
-                {
-                    return (canPlace: false, canPlaceOnThisElement: true);
-                }
-                else
-                {
-                    return (canPlace: false, canPlaceOnThisElement: false);
-                }
+                return false;
             }
         }
-        return (canPlace: true, canPlaceOnThisElement: false);
+        // Do poprawy ale to kiedyś (jak nie zapomne)
+        LayerMask elementGridLayer = 1 << 9;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray,Mathf.Infinity, elementGridLayer))
+        {
+            if(elementCanBePlaceOnOther)
+            {
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
     private List<Vector3Int> CalculatePosition(Vector3Int gridPosition, Vector2Int elementSize) //object Can Be Bigger Than 1x1 sometimes we must block more space
     {

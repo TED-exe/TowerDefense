@@ -1942,7 +1942,7 @@ GameObject:
   - component: {fileID: 1038616626}
   - component: {fileID: 1038616625}
   - component: {fileID: 1038616624}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: GridLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
