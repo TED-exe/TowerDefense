@@ -22,7 +22,6 @@ public class PreviewSystem : MonoBehaviour
 
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
-        Debug.Log("spawn");
         previewObject = Instantiate(prefab);
         
         PreparePreview(previewObject);

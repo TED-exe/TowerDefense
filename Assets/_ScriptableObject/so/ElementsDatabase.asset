@@ -18,22 +18,26 @@ MonoBehaviour:
     <elementSize>k__BackingField: {x: 1, y: 1}
     <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: e13ea26930aafa3488ce0b7ca1e06b5b,
       type: 3}
-    <canSetElementAtThis>k__BackingField: 1
+    <canPlaceOnThisElement>k__BackingField: 1
+    <canByPlacedOnOtherElemets>k__BackingField: 0
   - <elementName>k__BackingField: CUBE 2x1
     <ID>k__BackingField: 1
     <elementSize>k__BackingField: {x: 2, y: 1}
     <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: 4bbf04449f668f04ca35e8120b84276b,
       type: 3}
-    <canSetElementAtThis>k__BackingField: 1
+    <canPlaceOnThisElement>k__BackingField: 1
+    <canByPlacedOnOtherElemets>k__BackingField: 0
   - <elementName>k__BackingField: SPHERE
     <ID>k__BackingField: 2
     <elementSize>k__BackingField: {x: 1, y: 1}
     <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: 1d67c515245972340bae3344e08eae79,
       type: 3}
-    <canSetElementAtThis>k__BackingField: 0
+    <canPlaceOnThisElement>k__BackingField: 0
+    <canByPlacedOnOtherElemets>k__BackingField: 1
   - <elementName>k__BackingField: CAPSULE
     <ID>k__BackingField: 3
     <elementSize>k__BackingField: {x: 1, y: 1}
     <elementPrefab>k__BackingField: {fileID: 5364360057156703431, guid: 99b404a82e565f94fb98199d99929a97,
       type: 3}
-    <canSetElementAtThis>k__BackingField: 0
+    <canPlaceOnThisElement>k__BackingField: 0
+    <canByPlacedOnOtherElemets>k__BackingField: 1

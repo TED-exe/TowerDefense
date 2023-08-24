@@ -156,7 +156,6 @@ Transform:
   - {fileID: 967937071}
   - {fileID: 1262859340}
   - {fileID: 498276714}
-  - {fileID: 1038616623}
   - {fileID: 1896819797}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -516,7 +515,7 @@ Transform:
   m_GameObject: {fileID: 378377244}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.5, y: 0.005, z: 0.5}
-  m_LocalScale: {x: 1.1386071, y: 1.1386071, z: 1.1386071}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1896819797}
@@ -563,15 +562,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4bc301c00080dd54387f50a8db8d4e5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b13a361d19a9d14499f553268f2ecf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &410087039
@@ -775,8 +774,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 967937072}
         m_TargetAssemblyTypeName: PlacementSystem, Assembly-CSharp
-        m_MethodName: StartPlacement
-        m_Mode: 3
+        m_MethodName: StartRemoving
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -852,6 +851,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 331520343}
+  - {fileID: 1038616623}
   m_Father: {fileID: 31766594}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -903,6 +903,9 @@ MonoBehaviour:
   cellIndicator: {fileID: 1896819796}
   previewMaterialPrefab: {fileID: 2100000, guid: 978a24cc85fd7744092371cc990e7367,
     type: 2}
+  previewLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &598347080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,8 +1964,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 31766594}
-  m_RootOrder: 5
+  m_Father: {fileID: 498276714}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1038616624
 MeshCollider:
@@ -2289,7 +2292,7 @@ MonoBehaviour:
   sceneCamera: {fileID: 330585545}
   placementLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 584
 --- !u!1 &1262859338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,7 +2895,7 @@ Transform:
   m_Children:
   - {fileID: 378377245}
   m_Father: {fileID: 31766594}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930839510
 GameObject:

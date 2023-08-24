@@ -38,7 +38,10 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
-        bool placementValidity = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize, database.element[selectedElementIndex].canByPlacedOnOtherElemets);
+        bool placementValidity = data.CanPlaceObjectAtThisCell(gridPosition,
+                                                               database.element[selectedElementIndex].elementSize,
+                                                               database.element[selectedElementIndex].canByPlacedOnOtherElemets,
+                                                               database.element[selectedElementIndex].elementPrefab);
         if (!placementValidity)
         { return; }
 
@@ -50,7 +53,10 @@ public class PlacementState : IBuildingState
 
     public void UpdateState(Vector3Int gridPosition, Vector3 cellWorldPosition)
     {
-        bool placementValidity = data.CanPlaceObjectAtThisCell(gridPosition, database.element[selectedElementIndex].elementSize, database.element[selectedElementIndex].canByPlacedOnOtherElemets);
+        bool placementValidity = data.CanPlaceObjectAtThisCell(gridPosition,
+                                                       database.element[selectedElementIndex].elementSize,
+                                                       database.element[selectedElementIndex].canByPlacedOnOtherElemets,
+                                                       database.element[selectedElementIndex].elementPrefab);
 
         previewSystem.UpdatePosition(cellWorldPosition, placementValidity);
     }

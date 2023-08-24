@@ -31,7 +31,7 @@ public class RemovingState : IBuildingState
     // dodac sprawdzenie czy na bloku coś stoi (jeśli tak to nie można usunąć tego na dole)
     public void OnAction(Vector3Int gridPosition)
     {
-        if (!data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one,true))
+        if (!data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one))
         {
             gameObjectIndex = data.GetRepresentationIndex(gridPosition);
             if (gameObjectIndex == -1)
@@ -45,7 +45,7 @@ public class RemovingState : IBuildingState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
     {
-        return !(data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one,true));
+        return !(data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one));
     }
 
     public void UpdateState(Vector3Int gridPosition, Vector3 cellWorldPosition)
