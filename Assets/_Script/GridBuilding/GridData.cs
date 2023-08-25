@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,43 +16,82 @@ public class GridData // this is virtual grid to check where can you place eleme
 
         for (int x = xAxis.y; x <= xAxis.x; x++)
         {
-            AddElementOnGridPosition(new Vector3Int(x, 0, yAxis.x), new Vector2Int(1, 1),-1, -1, false);
-            AddElementOnGridPosition(new Vector3Int(x, 0, yAxis.y), new Vector2Int(1, 1),-1, -1, false);
+            AddElementOnGridPosition(new Vector3Int(x, 0, yAxis.x), new Vector2Int(1, 1), -1, -1, false);
+            AddElementOnGridPosition(new Vector3Int(x, 0, yAxis.y), new Vector2Int(1, 1), -1, -1, false);
         }
         for (int y = yAxis.y; y <= yAxis.x; y++)
         {
-            AddElementOnGridPosition(new Vector3Int(xAxis.x, 0, y), new Vector2Int(1, 1),-1, -1, false);
-            AddElementOnGridPosition(new Vector3Int(xAxis.y, 0, y), new Vector2Int(1, 1),-1, -1, false);
+            AddElementOnGridPosition(new Vector3Int(xAxis.x, 0, y), new Vector2Int(1, 1), -1, -1, false);
+            AddElementOnGridPosition(new Vector3Int(xAxis.y, 0, y), new Vector2Int(1, 1), -1, -1, false);
         }
     }
-    public void AddElementOnGridPosition(Vector3Int gridPosition, Vector2Int elementSize,int ID, int placementObjectIndex, bool canSetElementAtThis)
+    public void AddElementOnGridPosition(Vector3Int gridPosition, Vector2Int elementSize, int ID, int placementObjectIndex, bool canSetElementAtThis)
     {
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
-        PlacementData data = new PlacementData(occupatePosition,ID, placementObjectIndex, canSetElementAtThis);
+        PlacementData data = new PlacementData(occupatePosition, ID, placementObjectIndex, canSetElementAtThis);
         foreach (var position in occupatePosition)
         {
             placementElement[position] = data;
         }
     }
-    public (bool canPlace, bool canPlaceOnThisElement) CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize)
+    public bool CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize, bool elementCanBePlaceOnOther = false)
     {
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
         foreach (var position in occupatePosition)
         {
+            if(placementElement.ContainsKey(position))
+            {
+                return false;
+            }
+        }
+        return true;
+        /*List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
+        foreach (var position in occupatePosition)
+        {
             if (placementElement.ContainsKey(position))
             {
-                if (placementElement[position].canSetElementAtThis == true)
+                return false;
+            }
+        }
+        if (prefab != null)
+        {
+            if(!prefab.GetComponent<ObjectRayCaster>().CheckRayCollision())
+            {
+                if(elementCanBePlaceOnOther)
                 {
-                    return (canPlace: false, canPlaceOnThisElement: true);
+                    return true;
                 }
                 else
                 {
-                    return (canPlace: false, canPlaceOnThisElement: false);
+                    return false;
                 }
             }
         }
-        return (canPlace: true, canPlaceOnThisElement: false);
+        return true;*/
+
+
+        /*List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
+        foreach (var position in occupatePosition)
+        {
+            if (placementElement.ContainsKey(position))
+            {
+                return false;
+            }
+        }
+        // Do poprawy ale to kiedyś (jak nie zapomne)
+        LayerMask elementGridLayer = 1 << 9;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray,Mathf.Infinity, elementGridLayer))
+        {
+            if(elementCanBePlaceOnOther)
+            {
+                return true;
+            }
+            return false;
+        }
+        return true;*/
     }
+
     private List<Vector3Int> CalculatePosition(Vector3Int gridPosition, Vector2Int elementSize) //object Can Be Bigger Than 1x1 sometimes we must block more space
     {
         List<Vector3Int> returnVal = new();
@@ -84,14 +123,14 @@ public class GridData // this is virtual grid to check where can you place eleme
 
     internal int GetRepresentationIndex(Vector3Int gridPosition)
     {
-        if(placementElement.ContainsKey(gridPosition) == false)
+        if (placementElement.ContainsKey(gridPosition) == false)
         { return -2; }
         return placementElement[gridPosition].placedObjectIndex;
     }
 
     internal void RemoveObjectAt(Vector3Int gridPosition)
     {
-        foreach(var pos in placementElement[gridPosition].occupiedPositions)
+        foreach (var pos in placementElement[gridPosition].occupiedPositions)
         {
             Debug.Log("tak");
             placementElement.Remove(pos);
