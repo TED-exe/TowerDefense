@@ -20,13 +20,14 @@ public class PreviewSystem : MonoBehaviour
         cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();
     }
 
-    public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
+    public GameObject StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
         
         PreparePreview(previewObject);
         PrepareCursor(size);
         cellIndicator.SetActive(true);
+        return previewObject;
     }
 
     private void PrepareCursor(Vector2Int size)
@@ -68,7 +69,6 @@ public class PreviewSystem : MonoBehaviour
         {
             MovePreview(position);
             ApplyFeedbackToPreview(validity);
-
         }
 
         MoveCursor(position);
@@ -102,6 +102,7 @@ public class PreviewSystem : MonoBehaviour
             position.x,
             position.y + previewYOffset,
             position.z);
+        
     }
 
     internal void StartShowingRemovePreview()

@@ -34,9 +34,18 @@ public class GridData // this is virtual grid to check where can you place eleme
             placementElement[position] = data;
         }
     }
-    public bool CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize, bool elementCanBePlaceOnOther = true, GameObject prefab = null)
+    public bool CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize, bool elementCanBePlaceOnOther = false)
     {
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
+        foreach (var position in occupatePosition)
+        {
+            if(placementElement.ContainsKey(position))
+            {
+                return false;
+            }
+        }
+        return true;
+        /*List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
         foreach (var position in occupatePosition)
         {
             if (placementElement.ContainsKey(position))
@@ -46,10 +55,7 @@ public class GridData // this is virtual grid to check where can you place eleme
         }
         if (prefab != null)
         {
-            if(prefab.GetComponent<ObjectRayCaster>().CheckRayCollision())
-            {
-                return true;
-            }
+            if(!prefab.GetComponent<ObjectRayCaster>().CheckRayCollision())
             {
                 if(elementCanBePlaceOnOther)
                 {
@@ -61,8 +67,7 @@ public class GridData // this is virtual grid to check where can you place eleme
                 }
             }
         }
-        Debug.Log("placement false");
-        return true;
+        return true;*/
 
 
         /*List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
@@ -86,6 +91,7 @@ public class GridData // this is virtual grid to check where can you place eleme
         }
         return true;*/
     }
+
     private List<Vector3Int> CalculatePosition(Vector3Int gridPosition, Vector2Int elementSize) //object Can Be Bigger Than 1x1 sometimes we must block more space
     {
         List<Vector3Int> returnVal = new();

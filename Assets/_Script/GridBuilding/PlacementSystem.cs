@@ -32,7 +32,7 @@ public class PlacementSystem : MonoBehaviour
     private void Update()
     {
         if (buildingState == null)
-            return;
+        { return; }
 
         Vector3 mousePos = inputManager.GetMousePosition().position;
         Vector3Int gridPos = grid.WorldToCell(mousePos);
@@ -45,7 +45,7 @@ public class PlacementSystem : MonoBehaviour
             lastDetectedPosition = gridPos;
         }
     }
-    private void GridLayerOffset(int scaleX, int scaleY)//give offset in position (gridLayer)
+    private void GridLayerOffset(int scaleX, int scaleY)
     {
         if (scaleX % 2 != 0)
         {
@@ -57,13 +57,12 @@ public class PlacementSystem : MonoBehaviour
         }
 
     }
-    public void StartPlacement(int elementIndex) // this method is called on ui button click;
+    public void StartPlacement(int elementIndex)
     {
-        StopPlacement(); // MUST BE STOPPED!!!! if you don't reset it, it will be triggered several times 
+        StopPlacement();
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(elementIndex, grid, previewSystem, elementDatabase, gridData, elementPlacer);
 
-        // subscribe method in action
         inputManager.onClick += PlaceElement;
         inputManager.onExit += StopPlacement;
     }
@@ -93,9 +92,7 @@ public class PlacementSystem : MonoBehaviour
     private void PlaceElement()
     {
         if (inputManager.IsPointerOverUI())
-        {
-            return;
-        }
+        { return; }
         Vector3 mousePosition = inputManager.GetMousePosition().position;
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
