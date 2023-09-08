@@ -38,11 +38,17 @@ public class PreviewSystem : MonoBehaviour
             cellIndicatorRenderer.material.mainTextureScale = size;
         }
     }
-
+    private void SetGameLayerRecursive(GameObject gameObject, int layer)
+    {
+        gameObject.layer = layer;
+        foreach (Transform child in gameObject.transform)
+        {
+            SetGameLayerRecursive(child.gameObject, layer);
+        }
+    }
     private void PreparePreview(GameObject previewObject)
     {
-        previewObject.transform.GetChild(0).gameObject.layer = 7;
-        previewObject.layer = 7;
+        SetGameLayerRecursive(previewObject, 7);
         previewObject.name += " PREVIEW";
         Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
         foreach (Renderer renderer in renderers)

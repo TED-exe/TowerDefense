@@ -10,12 +10,12 @@ public class ElementsDatabase : ScriptableObject
 }
 [Serializable]
 public class ElementsInformation
-
 {
     [field: SerializeField] public string elementName { get; private set; }
     [field: SerializeField] public int ID { get; private set; }
     [field: SerializeField] public Vector2Int elementSize { get; private set; }
     [field: SerializeField] public GameObject elementPrefab { get; private set; }
+    [field: SerializeField] public float cost { get; private set; }
     [field: SerializeField] public bool canPlaceOnThisElement { get; private set; }
     [field: SerializeField] public bool canByPlacedOnOtherElemets { get; private set; }
 }

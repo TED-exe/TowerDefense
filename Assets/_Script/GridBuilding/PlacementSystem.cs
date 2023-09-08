@@ -14,13 +14,13 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Grid grid;
     [SerializeField] private ElementsDatabase elementDatabase;
     [SerializeField] private ElementPlacer elementPlacer;
+    [SerializeField] private ElementRotateSystem elementRotateSystem;
 
     private GridData gridData = new();
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
 
     IBuildingState buildingState;
 
-    //preview jak sciagasz prewiev z gory na dol
     private void Awake()
     {
         float scaleX = Convert.ToSingle(gridVisualization.transform.localScale.x / 0.1);
@@ -38,6 +38,17 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int gridPos = grid.WorldToCell(mousePos);
         Vector3 cellWorldPosition = grid.CellToWorld(gridPos);
         cellWorldPosition += Vector3.up * 0.02f;
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            buildingState.UpdateState(gridPos, cellWorldPosition);
+            lastDetectedPosition = gridPos;
+        }
+        if (Input.GetKeyDown(KeyCode.Q)) 
+        {
+            buildingState.UpdateState(gridPos, cellWorldPosition);
+            lastDetectedPosition = gridPos;
+        }
 
         if (lastDetectedPosition != gridPos)
         {
@@ -61,7 +72,14 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new PlacementState(elementIndex, grid, previewSystem, elementDatabase, gridData, elementPlacer);
+        buildingState = new PlacementState(
+            elementIndex,
+            grid,
+            previewSystem,
+            elementDatabase,
+            gridData,
+            elementPlacer,
+            elementRotateSystem);
 
         inputManager.onClick += PlaceElement;
         inputManager.onExit += StopPlacement;

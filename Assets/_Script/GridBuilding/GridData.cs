@@ -27,12 +27,16 @@ public class GridData // this is virtual grid to check where can you place eleme
     }
     public void AddElementOnGridPosition(Vector3Int gridPosition, Vector2Int elementSize, int ID, int placementObjectIndex, bool canSetElementAtThis)
     {
+        Debug.Log("tak");
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
+        Debug.Log(occupatePosition);
         PlacementData data = new PlacementData(occupatePosition, ID, placementObjectIndex, canSetElementAtThis);
         foreach (var position in occupatePosition)
         {
             placementElement[position] = data;
+            Debug.Log(position);
         }
+        Debug.Log("nie");
     }
     public bool CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize, bool elementCanBePlaceOnOther = false)
     {
@@ -45,51 +49,6 @@ public class GridData // this is virtual grid to check where can you place eleme
             }
         }
         return true;
-        /*List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
-        foreach (var position in occupatePosition)
-        {
-            if (placementElement.ContainsKey(position))
-            {
-                return false;
-            }
-        }
-        if (prefab != null)
-        {
-            if(!prefab.GetComponent<ObjectRayCaster>().CheckRayCollision())
-            {
-                if(elementCanBePlaceOnOther)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        return true;*/
-
-
-        /*List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
-        foreach (var position in occupatePosition)
-        {
-            if (placementElement.ContainsKey(position))
-            {
-                return false;
-            }
-        }
-        // Do poprawy ale to kiedyś (jak nie zapomne)
-        LayerMask elementGridLayer = 1 << 9;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray,Mathf.Infinity, elementGridLayer))
-        {
-            if(elementCanBePlaceOnOther)
-            {
-                return true;
-            }
-            return false;
-        }
-        return true;*/
     }
 
     private List<Vector3Int> CalculatePosition(Vector3Int gridPosition, Vector2Int elementSize) //object Can Be Bigger Than 1x1 sometimes we must block more space

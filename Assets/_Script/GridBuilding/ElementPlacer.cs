@@ -8,10 +8,11 @@ public class ElementPlacer : MonoBehaviour
     [SerializeField] private Transform elementsParent;
     [SerializeField] private List<GameObject> placedElements = new List<GameObject>();
 
-    public int PlaceElement(GameObject elementPrefab, Vector3 elementPosition)
+    public int PlaceElement(GameObject elementPrefab, Vector3 elementPosition, float rotateValue)
     {
         GameObject newElement = Instantiate(elementPrefab, elementsParent);
         newElement.transform.position = elementPosition;
+        newElement.transform.GetChild(0).Rotate(0, rotateValue, 0);
         placedElements.Add(newElement);
         return placedElements.Count - 1;
     }

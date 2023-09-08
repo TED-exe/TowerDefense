@@ -1,25 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class ElementRotateSystem : MonoBehaviour
 {
-    public void MyInput(GameObject element, ElementsDatabase database)
+    float rotateValue = 0;
+    public float RotateElement(GameObject element,bool rotateRight)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            RotateElement(element, database, true);
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            RotateElement(element, database, false);
-            return;
-        }
-    }
-
-    private void RotateElement(GameObject element, ElementsDatabase database,bool rotateRight)
-    {
-        Debug.Log(rotateRight);
+        float rotationAngle = rotateRight ? 90 : -90;
+        rotateValue += rotationAngle;
+        float returnValue = rotateValue;
+        element.transform.GetChild(0).Rotate(0, rotateValue, 0);
+        rotateValue = 0;
+        return returnValue;
     }
 }
