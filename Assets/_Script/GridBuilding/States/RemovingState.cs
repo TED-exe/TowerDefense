@@ -28,7 +28,6 @@ public class RemovingState : IBuildingState
         previewSystem.StopShowingPreview();
     }
 
-    // dodac sprawdzenie czy na bloku coś stoi (jeśli tak to nie można usunąć tego na dole)
     public void OnAction(Vector3Int gridPosition)
     {
         if (!data.CanPlaceObjectAtThisCell(gridPosition, Vector2Int.one))

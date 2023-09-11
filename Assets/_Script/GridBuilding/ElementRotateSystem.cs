@@ -5,7 +5,7 @@ using UnityEngine.Rendering.UI;
 
 public class ElementRotateSystem : MonoBehaviour
 {
-    float rotateValue = 0;
+    private float rotateValue = 0;
     public float RotateElement(GameObject element,bool rotateRight)
     {
         float rotationAngle = rotateRight ? 90 : -90;

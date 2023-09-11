@@ -11,10 +11,8 @@ public class ElementRayCaster : MonoBehaviour
     {
         foreach (Transform t in rayCaster)
         {
-            if (Physics.Raycast(t.position, Vector3.down, out var hit, 15f, layerToHit))
-            {
-                return false;
-            }
+            if (Physics.Raycast(t.position, Vector3.down, 15f, layerToHit))
+            { return false; }
         }
         return true;
     }

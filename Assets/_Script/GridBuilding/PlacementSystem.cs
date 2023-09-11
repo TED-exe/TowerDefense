@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
-    [Header("REFERENCE")]
     [SerializeField] private Transform elementsParent;
     [SerializeField] private GameObject gridVisualization;
     [SerializeField] private InputManager inputManager;
@@ -39,12 +38,12 @@ public class PlacementSystem : MonoBehaviour
         Vector3 cellWorldPosition = grid.CellToWorld(gridPos);
         cellWorldPosition += Vector3.up * 0.02f;
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             buildingState.UpdateState(gridPos, cellWorldPosition);
             lastDetectedPosition = gridPos;
         }
-        if (Input.GetKeyDown(KeyCode.Q)) 
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             buildingState.UpdateState(gridPos, cellWorldPosition);
             lastDetectedPosition = gridPos;

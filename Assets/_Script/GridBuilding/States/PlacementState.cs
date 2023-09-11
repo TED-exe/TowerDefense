@@ -34,11 +34,11 @@ public class PlacementState : IBuildingState
 
         selectedElementIndex = database.element.FindIndex(x => x.ID == iD); // select element
         if (selectedElementIndex > -1)
-        {
-            elementPreview = previewSystem.StartShowingPlacementPreview(database.element[selectedElementIndex].elementPrefab, database.element[selectedElementIndex].elementSize);
-        }
+        { elementPreview = previewSystem.StartShowingPlacementPreview(
+            database.element[selectedElementIndex].elementPrefab,
+            database.element[selectedElementIndex].elementSize); }
         else
-            throw new System.Exception($"No object With ID {iD}");
+        { throw new System.Exception($"No object With ID {iD}"); }
         this.rotateSystem = rotateSystem;
     }
 
@@ -60,26 +60,22 @@ public class PlacementState : IBuildingState
         { return; }
         else
         {
-
             if (!elementPreview.GetComponent<ElementRayCaster>().CheckRayCollision())
             {
                 if (database.element[selectedElementIndex].canByPlacedOnOtherElemets)
-                {
-                    PlaceElement(gridPosition);
-                }
+                { PlaceElement(gridPosition); }
+
                 return;
             }
             else
-            {
-                PlaceElement(gridPosition);
-            }
+            { PlaceElement(gridPosition); }
         }
     }
     private void PlaceElement(Vector3Int gridPosition)
     {
         int index = elementPlacer.PlaceElement(
             database.element[selectedElementIndex].elementPrefab,
-            grid.CellToWorld(gridPosition),rotateValue);
+            grid.CellToWorld(gridPosition), rotateValue);
 
         data.AddElementOnGridPosition(
             gridPosition,
@@ -93,32 +89,22 @@ public class PlacementState : IBuildingState
     public void UpdateState(Vector3Int gridPosition, Vector3 cellWorldPosition)
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {
-            rotateValue += rotateSystem.RotateElement(elementPreview, true);
-        }
+        { rotateValue += rotateSystem.RotateElement(elementPreview, true); }
         if (Input.GetKeyDown(KeyCode.Q))
-        {
-            rotateValue += rotateSystem.RotateElement(elementPreview,false);
-        }
+        { rotateValue += rotateSystem.RotateElement(elementPreview, false); }
+
         bool placementValidity = data.CanPlaceObjectAtThisCell(
             gridPosition,
             database.element[selectedElementIndex].elementSize,
             database.element[selectedElementIndex].canByPlacedOnOtherElemets);
 
         previewSystem.UpdatePosition(cellWorldPosition, placementValidity);
-        if (placementValidity)
+        if (placementValidity && !elementPreview.GetComponent<ElementRayCaster>().CheckRayCollision())
         {
-            if (!elementPreview.GetComponent<ElementRayCaster>().CheckRayCollision())
-            {
-                if (database.element[selectedElementIndex].canByPlacedOnOtherElemets)
-                {
-                    previewSystem.UpdatePosition(cellWorldPosition, true);
-                }
-                else
-                {
-                    previewSystem.UpdatePosition(cellWorldPosition, false);
-                }
-            }
+            if (database.element[selectedElementIndex].canByPlacedOnOtherElemets)
+            { previewSystem.UpdatePosition(cellWorldPosition, true); }
+            else
+            { previewSystem.UpdatePosition(cellWorldPosition, false); }
         }
     }
 }

@@ -23,7 +23,7 @@ public class PreviewSystem : MonoBehaviour
     public GameObject StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
-        
+
         PreparePreview(previewObject);
         PrepareCursor(size);
         cellIndicator.SetActive(true);
@@ -42,9 +42,7 @@ public class PreviewSystem : MonoBehaviour
     {
         gameObject.layer = layer;
         foreach (Transform child in gameObject.transform)
-        {
-            SetGameLayerRecursive(child.gameObject, layer);
-        }
+        { SetGameLayerRecursive(child.gameObject, layer); }
     }
     private void PreparePreview(GameObject previewObject)
     {
@@ -54,10 +52,10 @@ public class PreviewSystem : MonoBehaviour
         foreach (Renderer renderer in renderers)
         {
             Material[] materials = renderer.materials;
+
             for (int i = 0; i < materials.Length; i++)
-            {
-                materials[i] = previewMaterialInstance;
-            }
+            { materials[i] = previewMaterialInstance; }
+
             renderer.materials = materials;
         }
     }
@@ -66,7 +64,8 @@ public class PreviewSystem : MonoBehaviour
     {
         cellIndicator.SetActive(false);
         if (previewObject != null)
-            Destroy(previewObject);
+        { Destroy(previewObject); }
+
     }
 
     public void UpdatePosition(Vector3 position, bool validity)
@@ -108,7 +107,7 @@ public class PreviewSystem : MonoBehaviour
             position.x,
             position.y + previewYOffset,
             position.z);
-        
+
     }
 
     internal void StartShowingRemovePreview()

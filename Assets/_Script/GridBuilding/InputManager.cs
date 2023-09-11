@@ -14,27 +14,24 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         { onClick?.Invoke(); }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         { onExit?.Invoke(); }
     }
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
-    public (Vector3 position , bool setActive) GetMousePosition()
+    public (Vector3 position, bool setActive) GetMousePosition()
     {
         Vector3 mousePos = Input.mousePosition;
         Ray ray = sceneCamera.ScreenPointToRay(mousePos);
-        if(Physics.Raycast(ray,out RaycastHit hit , 100, placementLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, placementLayerMask))
         {
             lastMouseIndicatorPosition = hit.point;
             return (position: lastMouseIndicatorPosition, setActive: true);
         }
         else
-        {
-            return (position: lastMouseIndicatorPosition, setActive: false);
-        }
-        
+        { return (position: lastMouseIndicatorPosition, setActive: false); }
     }
 }

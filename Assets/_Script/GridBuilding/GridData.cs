@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-
 public class GridData // this is virtual grid to check where can you place element
 {
     Dictionary<Vector3Int, PlacementData> placementElement = new();
@@ -27,26 +22,18 @@ public class GridData // this is virtual grid to check where can you place eleme
     }
     public void AddElementOnGridPosition(Vector3Int gridPosition, Vector2Int elementSize, int ID, int placementObjectIndex, bool canSetElementAtThis)
     {
-        Debug.Log("tak");
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
-        Debug.Log(occupatePosition);
         PlacementData data = new PlacementData(occupatePosition, ID, placementObjectIndex, canSetElementAtThis);
         foreach (var position in occupatePosition)
-        {
-            placementElement[position] = data;
-            Debug.Log(position);
-        }
-        Debug.Log("nie");
+        { placementElement[position] = data; }
     }
     public bool CanPlaceObjectAtThisCell(Vector3Int gridPosition, Vector2Int elementSize, bool elementCanBePlaceOnOther = false)
     {
         List<Vector3Int> occupatePosition = CalculatePosition(gridPosition, elementSize);
         foreach (var position in occupatePosition)
         {
-            if(placementElement.ContainsKey(position))
-            {
-                return false;
-            }
+            if (placementElement.ContainsKey(position))
+            { return false; }
         }
         return true;
     }
@@ -57,9 +44,8 @@ public class GridData // this is virtual grid to check where can you place eleme
         for (int x = 0; x < elementSize.x; x++)
         {
             for (int y = 0; y < elementSize.y; y++)
-            {
-                returnVal.Add(gridPosition + new Vector3Int(x, 0, y));
-            }
+            { returnVal.Add(gridPosition + new Vector3Int(x, 0, y)); }
+
         }
         return returnVal;
     }
@@ -90,10 +76,8 @@ public class GridData // this is virtual grid to check where can you place eleme
     internal void RemoveObjectAt(Vector3Int gridPosition)
     {
         foreach (var pos in placementElement[gridPosition].occupiedPositions)
-        {
-            Debug.Log("tak");
-            placementElement.Remove(pos);
-        }
+        { placementElement.Remove(pos); }
+
     }
 }
 public class PlacementData
